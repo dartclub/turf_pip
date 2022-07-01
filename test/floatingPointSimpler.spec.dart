@@ -4,7 +4,7 @@ import 'package:turf/helpers.dart';
 
 main() {
   group(
-    '',
+    'floating point simple',
     () {
       var polygon = Polygon(coordinates: [
         [

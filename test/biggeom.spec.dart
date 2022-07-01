@@ -7,14 +7,14 @@ import 'package:turf/helpers.dart';
 
 main() {
   group(
-    '',
+    'big geom',
     () {
       var inDir = Directory('./test/fixtures/simple');
       for (var file in inDir.listSync(recursive: true)) {
         if (file is File && file.path.endsWith('.geojson')) {
           Polygon switzCoords =
               (GeoJSONObject.fromJson(jsonDecode(file.readAsStringSync()))
-                      as Feature<Polygon>)
+                      as Feature)
                   .geometry as Polygon;
           test(
             'is inside',
@@ -40,7 +40,7 @@ main() {
         if (file is File && file.path.endsWith('.geojson')) {
           Polygon switzerlandKinked =
               (GeoJSONObject.fromJson(jsonDecode(file.readAsStringSync()))
-                      as Feature<Polygon>)
+                      as Feature)
                   .geometry as Polygon;
 
           test(
