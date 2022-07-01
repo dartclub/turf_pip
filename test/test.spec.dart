@@ -4,7 +4,7 @@ import 'package:turf/helpers.dart';
 
 main() {
   group(
-    '',
+    'normal tests',
     () {
       Polygon polygon = Polygon(coordinates: [
         [
@@ -156,7 +156,7 @@ main() {
             ],
           );
 
-          expect(pip(Point(coordinates: Position.of([1, 1])), poly),
+          expect(() => pip(Point(coordinates: Position.of([1, 1])), poly),
               throwsA(isA<Exception>()));
           // 'First and last coordinates in a ring must be the same');
         },
