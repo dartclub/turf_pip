@@ -16,22 +16,22 @@ const geojsonPoly = {type: 'Polygon', coordinates: polywrapped}
 
 
 insideSuite
-    .add('point-in-poly-hao', function() {
+    .add('point-in-poly-hao', () {
         pipHao([1.5, 1.5], polywrapped)
     })
-    .add('turf-point-in-polygon', function() {
+    .add('turf-point-in-polygon', () {
         turfPip(point, geojsonPoly)
     })
-    .add('point-in-polygon', function() {
+    .add('point-in-polygon', () {
         inside([1.5, 1.5], polygon)
     })
-    .add('robust-point-in-polygon', function() {
+    .add('robust-point-in-polygon', () {
         robustPip(polygon, [1.5, 1.5])
     })
-    .on('cycle', function(event) {
+    .on('cycle', (event) {
         console.log(String(event.target))
     })
-    .on('complete', function() {
+    .on('complete', () {
         console.log('Fastest is ' + this.filter('fastest').map('name'));
     })
     .run()
@@ -45,22 +45,22 @@ const point2 = {type: 'Point', coordinates: [8, 46.5]}
 
 
 largePolySuite
-    .add('point-in-poly-hao', function() {
+    .add('point-in-poly-hao', () {
         pipHao([8, 46.5], switzCoords)
     })
-    .add('turf-point-in-polygon', function() {
+    .add('turf-point-in-polygon', () {
         turfPip(point2, switzerland)
     })
-    .add('point-in-polygon', function() {
+    .add('point-in-polygon', () {
         inside([8, 46.5], mainSwissRing)
     })
-    .add('robust-point-in-polygon', function() {
+    .add('robust-point-in-polygon', () {
         robustPip(mainSwissRing, [8, 46.5])
     })
-    .on('cycle', function(event) {
+    .on('cycle', (event) {
         console.log(String(event.target))
     })
-    .on('complete', function() {
+    .on('complete', () {
         console.log('Fastest is ' + this.filter('fastest').map('name'));
     })
     .run()

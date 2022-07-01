@@ -1,39 +1,73 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+A small library for detecting in a point lies inside a polygon
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
+**Features**
+- Works on polygons with holes
+- Works with degenerate/self-intersecting polyons 
+- Returns `0` if on the edge
+- Not effected by floating point errors
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+### Usage
+Install via `npm install point-in-polygon-hao`
 
-## Features
+````
+import inside from 'point-in-polygon-hao'
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+const polygon = [
+  [
+    [1, 1],
+    [1, 2],
+    [2, 2],
+    [2, 1],
+    [1, 1]
+  ]
+];
 
-## Getting started
+inside([ 1.5, 1.5 ], polygon)
+// => true
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+inside([ 4.9, 1.2 ], polygon)
+// => false
 
-## Usage
+inside([1, 2], polygon)
+// => 0 to indicate on edge
+````
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
+**Note:** The input polygon format aligns with the GeoJson specification for polygons. This means that the first and last coordinate in a polygon must be repeated, if not this library will throw an error.
+````
+const polygonWithHole = [
+  [
+    [0, 0], [1, 0], [1, 1], [0, 1], [0, 0]
+  ],
+  [
+    [0.1, 0.1], [0.1, 0.9], [0.9, 0.9], [0.9, 0.1], [0.1, 0.1]
+  ]
+]
+````
+The library does not support multi-polygons.
 
-```dart
-const like = 'sample';
-```
+### Comparisons
+Some rough comparisons to similar libraries. 
+While `point-in-polygon` is slightly faster in most cases it does not support polygons with holes or degenerate polygons.
 
-## Additional information
+````
+// For a point in a much larger geometry (700+ vertices)
+point-in-poly-hao x 474,180 ops/sec ±0.55% (93 runs sampled)
+point-in-polygon x 489,649 ops/sec ±0.75% (91 runs sampled)
+robust-point-in-polygon x 376,268 ops/sec ±0.79% (89 runs sampled)
+````
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+````
+// For a point in bounding box check
+point-in-poly-hao x 29,365,704 ops/sec ±1.30% (90 runs sampled)
+point-in-polygon x 42,339,450 ops/sec ±0.78% (95 runs sampled)
+robust-point-in-polygon x 20,675,569 ops/sec ±0.65% (95 runs sampled)
+````
+
+### Algorithm
+This library is based on the paper [Optimal Reliable Point-in-Polygon Test and
+Differential Coding Boolean Operations on Polygons](https://www.researchgate.net/publication/328261365_Optimal_Reliable_Point-in-Polygon_Test_and_Differential_Coding_Boolean_Operations_on_Polygons)
+
+### Other notes
+* Works irrespective of winding order of polygon
+* Does not appear to be effected by floating point errors compared to `point-in-polygon` or `robust-point-in-polygon`
