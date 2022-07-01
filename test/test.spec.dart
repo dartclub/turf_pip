@@ -23,7 +23,7 @@ main() {
       test(
         'input is not modified',
         () {
-          expect(pip(Point(coordinates: Position.of([2, 1.5])), polygon), true);
+          pip(Point(coordinates: Position.of([2, 1.5])), polygon);
           expect(
             polygon.coordinates,
             [
