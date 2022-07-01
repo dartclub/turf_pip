@@ -1,34 +1,69 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:pip/pip.dart';
 import 'package:test/test.dart';
 import 'package:turf/helpers.dart';
 
 main() {
-  group('', () {
-    const switzerland = loadJsonFile.sync(
-        path.join(__dirname, 'fixtures', 'simple', 'switzerland.geojson'));
-    const switzCoords = switzerland.geometry.coordinates;
+  group(
+    '',
+    () {
+      var inDir = Directory('./test/fixtures/simple');
+      for (var file in inDir.listSync(recursive: true)) {
+        if (file is File && file.path.endsWith('.geojson')) {
+          Polygon switzCoords =
+              (GeoJSONObject.fromJson(jsonDecode(file.readAsStringSync()))
+                      as Feature<Polygon>)
+                  .geometry as Polygon;
+          test(
+            'is inside',
+            () {
+              expect(
+                  pip(Point(coordinates: Position.of([8, 46.5])), switzCoords),
+                  true);
+            },
+          );
 
-    test('is inside', () {
-      expect(
-          pip(Point(coordinates: Position.of([8, 46.5])), switzCoords), true);
-    });
+          test(
+            'is outside',
+            () {
+              expect(pip(Point(coordinates: Position.of([8, 44])), switzCoords),
+                  false);
+            },
+          );
+        }
+      }
 
-    test('is outside', () {
-      expect(pip(Point(coordinates: Position.of([8, 44])), switzCoords), false);
-    });
+      inDir = Directory('./test/fixtures/notSimple');
+      for (var file in inDir.listSync(recursive: true)) {
+        if (file is File && file.path.endsWith('.geojson')) {
+          Polygon switzerlandKinked =
+              (GeoJSONObject.fromJson(jsonDecode(file.readAsStringSync()))
+                      as Feature<Polygon>)
+                  .geometry as Polygon;
 
-    const switzerlandKinked = loadJsonFile.sync(path.join(
-        __dirname, 'fixtures', 'notSimple', 'switzerlandKinked.geojson'));
-    const switzKinkedCoords = switzerlandKinked.geometry.coordinates;
+          test(
+            'is inside kinked',
+            () {
+              expect(
+                  pip(Point(coordinates: Position.of([8, 46.5])),
+                      switzerlandKinked),
+                  true);
+            },
+          );
 
-    test('is inside kinked', () {
-      expect(pip(Point(coordinates: Position.of([8, 46.5])), switzKinkedCoords),
-          true);
-    });
-
-    test('is outside kinked', () {
-      expect(pip(Point(coordinates: Position.of([8, 44])), switzKinkedCoords),
-          false);
-    });
-  });
+          test(
+            'is outside kinked',
+            () {
+              expect(
+                  pip(Point(coordinates: Position.of([8, 44])),
+                      switzerlandKinked),
+                  false);
+            },
+          );
+        }
+      }
+    },
+  );
 }
