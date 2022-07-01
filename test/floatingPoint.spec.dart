@@ -1,26 +1,77 @@
-import test from 'ava'
-
-import inside from '../src/index'
-
 // Inspiration drawn from TurfJS issue
 // https://github.com/Turfjs/turf/issues/1597
 
-const polygon = [[[-115.1752628, 36.0873974], [-115.1752969, 36.0873974], [-115.1752969, 36.0874526], [-115.1752628, 36.0874526], [-115.1752628, 36.0873974]]]
+import 'package:pip/pip.dart';
+import 'package:test/test.dart';
+import 'package:turf/helpers.dart';
 
-test('is on edge poly', t => {
-    t.is(inside([-115.1752799, 36.0874526], polygon), 0)
-});
+main() {
+  group(
+    '',
+    () {
+      var polygon = Polygon(
+        coordinates: [
+          [
+            Position.of([-115.1752628, 36.0873974]),
+            Position.of([-115.1752969, 36.0873974]),
+            Position.of([-115.1752969, 36.0874526]),
+            Position.of([-115.1752628, 36.0874526]),
+            Position.of([-115.1752628, 36.0873974])
+          ]
+        ],
+      );
 
-test('is on other edge poly', t => {
-    t.is(inside([-115.1752799, 36.0873974], polygon), 0)
-});
+      test(
+        'is on edge poly',
+        () {
+          expect(
+              pip(Point(coordinates: Position.of([-115.1752799, 36.0874526])),
+                  polygon),
+              0); // is
+        },
+      );
 
-const shiftedPoly = [[[-115.1752628, 36.0873974], [-115.1752969, 36.0873974], [-115.1752969, 36.0874528], [-115.1752628, 36.0874528], [-115.1752628, 36.0873974]]]
+      test(
+        'is on other edge poly',
+        () {
+          expect(
+              pip(Point(coordinates: Position.of([-115.1752799, 36.0873974])),
+                  polygon),
+              0); // is
+        },
+      );
 
-test('is on edge slightly tweaked poly', t => {
-    t.is(inside([-115.1752799, 36.0874528], shiftedPoly), 0)
-});
+      var shiftedPoly = Polygon(
+        coordinates: [
+          [
+            Position.of([-115.1752628, 36.0873974]),
+            Position.of([-115.1752969, 36.0873974]),
+            Position.of([-115.1752969, 36.0874528]),
+            Position.of([-115.1752628, 36.0874528]),
+            Position.of([-115.1752628, 36.0873974])
+          ]
+        ],
+      );
 
-test('is on other edge slightly tweaked poly', t => {
-    t.is(inside([-115.1752799, 36.0873974], shiftedPoly), 0)
-});
+      test(
+        'is on edge slightly tweaked poly',
+        () {
+          expect(
+              pip(Point(coordinates: Position.of([-115.1752799, 36.0874528])),
+                  shiftedPoly),
+              0); // is
+        },
+      );
+
+      test(
+        'is on other edge slightly tweaked poly',
+        () {
+          expect(
+              pip(Point(coordinates: Position.of([-115.1752799, 36.0873974])),
+                  shiftedPoly),
+              0); // is
+        },
+      );
+    },
+  );
+}

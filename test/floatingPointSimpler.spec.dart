@@ -1,30 +1,69 @@
-import test from 'ava'
+import 'package:pip/pip.dart';
+import 'package:test/test.dart';
+import 'package:turf/helpers.dart';
 
-import inside from '../src/index'
+main() {
+  group(
+    '',
+    () {
+      var polygon = Polygon(coordinates: [
+        [
+          Position.of([1.111111111111, 1.111111111111]),
+          Position.of([1.111111111111, 2.111111111111]),
+          Position.of([2.111111111111, 2.111111111111]),
+          Position.of([2.111111111111, 1.111111111111]),
+          Position.of([1.111111111111, 1.111111111111])
+        ]
+      ]);
 
-const polygon = [[[1.111111111111, 1.111111111111], [1.111111111111, 2.111111111111], [2.111111111111, 2.111111111111], [2.111111111111, 1.111111111111], [1.111111111111, 1.111111111111]]]
+      _toPoint(List<num> list) => Point(coordinates: Position.of(list));
+      test(
+        'is on bottom edge poly',
+        () {
+          expect(pip(_toPoint([1.511111111111, 1.111111111111]), polygon),
+              0); // is
+        },
+      );
 
-test('is on bottom edge poly', t => {
-    t.is(inside([1.511111111111, 1.111111111111], polygon), 0)
-});
+      test(
+        'is on top edge poly',
+        () {
+          expect(pip(_toPoint([1.511111111111, 2.111111111111]), polygon),
+              0); // is
+        },
+      );
 
-test('is on top edge poly', t => {
-    t.is(inside([1.511111111111, 2.111111111111], polygon), 0)
-});
+      test(
+        'is on left edge poly',
+        () {
+          expect(pip(_toPoint([1.111111111111, 1.511111111111]), polygon),
+              0); // is
+        },
+      );
 
-test('is on left edge poly', t => {
-    t.is(inside([1.111111111111, 1.511111111111], polygon), 0)
-});
+      test(
+        'is on right edge poly',
+        () {
+          expect(pip(_toPoint([2.111111111111, 1.511111111111]), polygon),
+              0); // is
+        },
+      );
 
-test('is on right edge poly', t => {
-    t.is(inside([2.111111111111, 1.511111111111], polygon), 0)
-});
+      test(
+        'is just inside left edge',
+        () {
+          expect(pip(_toPoint([1.1111111111111, 1.511111111111]), polygon),
+              true); // is
+        },
+      );
 
-
-test('is just inside left edge', t => {
-    t.is(inside([1.1111111111111, 1.511111111111], polygon), true)
-});
-
-test('is just outside left edge', t => {
-    t.is(inside([1.111111111110, 1.511111111111], polygon), false)
-});
+      test(
+        'is just outside left edge',
+        () {
+          expect(pip(_toPoint([1.111111111110, 1.511111111111]), polygon),
+              false); // is
+        },
+      );
+    },
+  );
+}

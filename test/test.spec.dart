@@ -1,84 +1,166 @@
+import 'package:pip/pip.dart';
 import 'package:test/test.dart';
 import 'package:turf/helpers.dart';
 
-import test from 'ava'
+main() {
+  group(
+    '',
+    () {
+      Polygon polygon = Polygon(coordinates: [
+        [
+          Position.of([1, 1]),
+          Position.of([1, 2]),
+          Position.of([2, 2]),
+          Position.of([2, 1]),
+          Position.of([1, 1])
+        ]
+      ]);
 
-import { mainModule } from 'process';
-import inside from '../src/index'
+      test('is inside', () {
+        expect(pip(Point(coordinates: Position.of([1.5, 1.5])), polygon), true);
+      });
 
+      test(
+        'input is not modified',
+        () {
+          expect(pip(Point(coordinates: Position.of([2, 1.5])), polygon), true);
+          expect(
+            polygon.coordinates,
+            [
+              [
+                Position.of([1, 1]),
+                Position.of([1, 2]),
+                Position.of([2, 2]),
+                Position.of([2, 1]),
+                Position.of([1, 1])
+              ]
+            ],
+          );
+        },
+      );
 
-main(){
-    group('', (){
+      test(
+        'is outside',
+        () {
+          expect(
+              pip(Point(coordinates: Position.of([4.9, 1.2])), polygon), false);
+        },
+      );
 
-        Polygon polygon = [[[1, 1], [1, 2], [2, 2], [2, 1], [1, 1]]];
-        const orig = JSON.parse(JSON.stringify(polygon))
+      test(
+        'is on top edge',
+        () {
+          expect(
+              pip(Point(coordinates: Position.of([1.5, 2])), polygon), 0); // is
+        },
+      );
 
-        test('is inside', t => {
-            t.true(inside([1.5, 1.5], polygon))
-        });
+      test(
+        'is on bottom edge',
+        () {
+          expect(
+              pip(Point(coordinates: Position.of([1.5, 1])), polygon), 0); // is
+        },
+      );
 
-        test('input is not modified', t => {
-            inside([2, 1.5], polygon)
-            t.deepEqual(orig, polygon)
-        });
+      test(
+        'is on left edge',
+        () {
+          expect(
+              pip(Point(coordinates: Position.of([1, 1.5])), polygon), 0); // is
+        },
+      );
 
-        test('is outside', t => {
-            t.false(inside([4.9, 1.2], polygon))
-        });
+      test(
+        'is on right edge',
+        () {
+          expect(
+              pip(Point(coordinates: Position.of([2, 1.5])), polygon), 0); // is
+        },
+      );
 
-        test('is on top edge', t => {
-            t.is(inside([1.5, 2], polygon), 0)
-        });
+      Polygon polygonWithHole = Polygon(
+        coordinates: [
+          [
+            Position.of([1, 1]),
+            Position.of([1, 2]),
+            Position.of([2, 2]),
+            Position.of([2, 1]),
+            Position.of([1, 1])
+          ],
+          [
+            Position.of([1.5, 1.5]),
+            Position.of([1.5, 1.7]),
+            Position.of([1.7, 1.7]),
+            Position.of([1.7, 1.5]),
+            Position.of([1.5, 1.5])
+          ]
+        ],
+      );
 
-        test('is on bottom edge', t => {
-            t.is(inside([1.5, 1], polygon), 0)
-        });
+      test(
+        'is inside with hole',
+        () {
+          expect(
+              pip(Point(coordinates: Position.of([1.2, 1.2])), polygonWithHole),
+              true);
+        },
+      );
 
-        test('is on left edge', t => {
-            t.is(inside([1, 1.5], polygon), 0)
-        });
+      test(
+        'is outside with hole',
+        () {
+          expect(
+              pip(Point(coordinates: Position.of([4.9, 1.2])), polygonWithHole),
+              false);
+        },
+      );
 
-        test('is on right edge', t => {
-            t.is(inside([2, 1.5], polygon), 0)
-        });
+      test(
+        'is in the hole',
+        () {
+          expect(
+              pip(Point(coordinates: Position.of([1.6, 1.6])), polygonWithHole),
+              false);
+        },
+      );
 
+      test(
+        'is on edge with hole',
+        () {
+          expect(
+              pip(Point(coordinates: Position.of([1.5, 1.5])), polygonWithHole),
+              0); // is
+        },
+      );
 
-        const polygonWithHole = [[[1, 1], [1, 2], [2, 2], [2, 1], [1, 1]],
-        [[1.5, 1.5], [1.5, 1.7], [1.7, 1.7], [1.7, 1.5], [1.5, 1.5]]];
+      test(
+        'is on edge of the outside',
+        () {
+          expect(
+              pip(Point(coordinates: Position.of([1.2, 1])), polygonWithHole),
+              0); // is
+        },
+      );
 
-        test('is inside with hole', t => {
-            t.true(inside([1.2, 1.2], polygonWithHole))
-        });
+      test(
+        'error is thrown when not the same first and last coords',
+        () {
+          var poly = Polygon(
+            coordinates: [
+              [
+                Position.of([0, 0]),
+                Position.of([1, 0]),
+                Position.of([1, 1]),
+              ],
+            ],
+          );
 
-        test('is outside with hole', t => {
-            t.false(inside([4.9, 1.2], polygonWithHole))
-        });
-
-        test('is in the hole', t => {
-            t.false(inside([1.6, 1.6], polygonWithHole))
-        });
-
-        test('is on edge with hole', t => {
-            t.is(inside([1.5, 1.5], polygonWithHole), 0)
-        });
-
-        test('is on edge of the outside', t => {
-            t.is(inside([1.2, 1], polygonWithHole), 0)
-        });
-
-
-        test('error is thrown when not the same first and last coords', t => {
-            const poly = [[[0, 0], [1, 0], [1, 1]]]
-
-            const fn = () => {
-                inside([1, 1], poly)
-            };
-
-            const error = t.throws(() => {
-                fn()
-            }, { instanceOf: Error })
-            t.is(error.message, 'First and last coordinates in a ring must be the same');
-        });
-
-    });
+          expect(pip(Point(coordinates: Position.of([1, 1])), poly),
+              throwsA(isA<Exception>()));
+          // 'First and last coordinates in a ring must be the same');
+        },
+      );
+    },
+  );
 }
