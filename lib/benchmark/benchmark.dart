@@ -14,7 +14,6 @@
 // const point = {type: 'Point', coordinates: [1.5, 1.5]}
 // const geojsonPoly = {type: 'Polygon', coordinates: polywrapped}
 
-
 // insideSuite
 //     .add('point-in-poly-hao', () {
 //         pipHao([1.5, 1.5], polywrapped)
@@ -43,7 +42,6 @@
 // const mainSwissRing = switzCoords[0]
 // const point2 = {type: 'Point', coordinates: [8, 46.5]}
 
-
 // largePolySuite
 //     .add('point-in-poly-hao', () {
 //         pipHao([8, 46.5], switzCoords)
@@ -64,4 +62,3 @@
 //         console.log('Fastest is ' + this.filter('fastest').map('name'));
 //     })
 //     .run()
-
