@@ -21,9 +21,9 @@ main() {
         'is on bottom edge poly',
         () {
           expect(
-              pointInPolygon(
-                  _toPoint([1.511111111111, 1.111111111111]), polygon),
-              0); // is
+            pointInPolygon(_toPoint([1.511111111111, 1.111111111111]), polygon),
+            PointInPolygonResult.isOnEdge,
+          );
         },
       );
 
@@ -31,9 +31,9 @@ main() {
         'is on top edge poly',
         () {
           expect(
-              pointInPolygon(
-                  _toPoint([1.511111111111, 2.111111111111]), polygon),
-              0); // is
+            pointInPolygon(_toPoint([1.511111111111, 2.111111111111]), polygon),
+            PointInPolygonResult.isOnEdge,
+          );
         },
       );
 
@@ -41,9 +41,9 @@ main() {
         'is on left edge poly',
         () {
           expect(
-              pointInPolygon(
-                  _toPoint([1.111111111111, 1.511111111111]), polygon),
-              0); // is
+            pointInPolygon(_toPoint([1.111111111111, 1.511111111111]), polygon),
+            PointInPolygonResult.isOnEdge,
+          );
         },
       );
 
@@ -51,9 +51,9 @@ main() {
         'is on right edge poly',
         () {
           expect(
-              pointInPolygon(
-                  _toPoint([2.111111111111, 1.511111111111]), polygon),
-              0); // is
+            pointInPolygon(_toPoint([2.111111111111, 1.511111111111]), polygon),
+            PointInPolygonResult.isOnEdge,
+          );
         },
       );
 
@@ -61,9 +61,10 @@ main() {
         'is just inside left edge',
         () {
           expect(
-              pointInPolygon(
-                  _toPoint([1.1111111111111, 1.511111111111]), polygon),
-              true); // is
+            pointInPolygon(
+                _toPoint([1.1111111111111, 1.511111111111]), polygon),
+            PointInPolygonResult.isInside,
+          );
         },
       );
 
@@ -71,9 +72,9 @@ main() {
         'is just outside left edge',
         () {
           expect(
-              pointInPolygon(
-                  _toPoint([1.111111111110, 1.511111111111]), polygon),
-              false); // is
+            pointInPolygon(_toPoint([1.111111111110, 1.511111111111]), polygon),
+            PointInPolygonResult.isOutside,
+          );
         },
       );
     },

@@ -20,9 +20,10 @@ main() {
             'is inside',
             () {
               expect(
-                  pointInPolygon(
-                      Point(coordinates: Position.of([8, 46.5])), switzCoords),
-                  true);
+                pointInPolygon(
+                    Point(coordinates: Position.of([8, 46.5])), switzCoords),
+                PointInPolygonResult.isInside,
+              );
             },
           );
 
@@ -30,9 +31,10 @@ main() {
             'is outside',
             () {
               expect(
-                  pointInPolygon(
-                      Point(coordinates: Position.of([8, 44])), switzCoords),
-                  false);
+                pointInPolygon(
+                    Point(coordinates: Position.of([8, 44])), switzCoords),
+                PointInPolygonResult.isOutside,
+              );
             },
           );
         }
@@ -50,9 +52,10 @@ main() {
             'is inside kinked',
             () {
               expect(
-                  pointInPolygon(Point(coordinates: Position.of([8, 46.5])),
-                      switzerlandKinked),
-                  1);
+                pointInPolygon(Point(coordinates: Position.of([8, 46.5])),
+                    switzerlandKinked),
+                PointInPolygonResult.isInside,
+              );
             },
           );
 
@@ -62,7 +65,7 @@ main() {
               expect(
                   pointInPolygon(Point(coordinates: Position.of([8, 44])),
                       switzerlandKinked),
-                  -1);
+                  PointInPolygonResult.isOutside);
             },
           );
         }

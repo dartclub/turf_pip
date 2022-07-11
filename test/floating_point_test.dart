@@ -25,10 +25,11 @@ main() {
         'is on edge poly',
         () {
           expect(
-              pointInPolygon(
-                  Point(coordinates: Position.of([-115.1752799, 36.0874526])),
-                  polygon),
-              0); // is
+            pointInPolygon(
+                Point(coordinates: Position.of([-115.1752799, 36.0874526])),
+                polygon),
+            PointInPolygonResult.isOnEdge,
+          );
         },
       );
 
@@ -36,10 +37,11 @@ main() {
         'is on other edge poly',
         () {
           expect(
-              pointInPolygon(
-                  Point(coordinates: Position.of([-115.1752799, 36.0873974])),
-                  polygon),
-              0); // is
+            pointInPolygon(
+                Point(coordinates: Position.of([-115.1752799, 36.0873974])),
+                polygon),
+            PointInPolygonResult.isOnEdge,
+          );
         },
       );
 
@@ -59,10 +61,11 @@ main() {
         'is on edge slightly tweaked poly',
         () {
           expect(
-              pointInPolygon(
-                  Point(coordinates: Position.of([-115.1752799, 36.0874528])),
-                  shiftedPoly),
-              0); // is
+            pointInPolygon(
+                Point(coordinates: Position.of([-115.1752799, 36.0874528])),
+                shiftedPoly),
+            PointInPolygonResult.isOnEdge,
+          );
         },
       );
 
@@ -70,10 +73,11 @@ main() {
         'is on other edge slightly tweaked poly',
         () {
           expect(
-              pointInPolygon(
-                  Point(coordinates: Position.of([-115.1752799, 36.0873974])),
-                  shiftedPoly),
-              0); // is
+            pointInPolygon(
+                Point(coordinates: Position.of([-115.1752799, 36.0873974])),
+                shiftedPoly),
+            PointInPolygonResult.isOnEdge,
+          );
         },
       );
     },

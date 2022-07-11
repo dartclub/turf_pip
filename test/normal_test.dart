@@ -18,9 +18,9 @@ main() {
 
       test('is inside', () {
         expect(
-            pointInPolygon(
-                Point(coordinates: Position.of([1.5, 1.5])), polygon),
-            true);
+          pointInPolygon(Point(coordinates: Position.of([1.5, 1.5])), polygon),
+          PointInPolygonResult.isInside,
+        );
       });
 
       test(
@@ -46,9 +46,10 @@ main() {
         'is outside',
         () {
           expect(
-              pointInPolygon(
-                  Point(coordinates: Position.of([4.9, 1.2])), polygon),
-              false);
+            pointInPolygon(
+                Point(coordinates: Position.of([4.9, 1.2])), polygon),
+            PointInPolygonResult.isOutside,
+          );
         },
       );
 
@@ -56,9 +57,9 @@ main() {
         'is on top edge',
         () {
           expect(
-              pointInPolygon(
-                  Point(coordinates: Position.of([1.5, 2])), polygon),
-              0); // is
+            pointInPolygon(Point(coordinates: Position.of([1.5, 2])), polygon),
+            PointInPolygonResult.isOnEdge,
+          ); // is
         },
       );
 
@@ -66,9 +67,9 @@ main() {
         'is on bottom edge',
         () {
           expect(
-              pointInPolygon(
-                  Point(coordinates: Position.of([1.5, 1])), polygon),
-              0); // is
+            pointInPolygon(Point(coordinates: Position.of([1.5, 1])), polygon),
+            PointInPolygonResult.isOnEdge,
+          );
         },
       );
 
@@ -76,9 +77,9 @@ main() {
         'is on left edge',
         () {
           expect(
-              pointInPolygon(
-                  Point(coordinates: Position.of([1, 1.5])), polygon),
-              0); // is
+            pointInPolygon(Point(coordinates: Position.of([1, 1.5])), polygon),
+            PointInPolygonResult.isOnEdge,
+          );
         },
       );
 
@@ -86,9 +87,9 @@ main() {
         'is on right edge',
         () {
           expect(
-              pointInPolygon(
-                  Point(coordinates: Position.of([2, 1.5])), polygon),
-              0); // is
+            pointInPolygon(Point(coordinates: Position.of([2, 1.5])), polygon),
+            PointInPolygonResult.isOnEdge,
+          );
         },
       );
 
@@ -115,9 +116,10 @@ main() {
         'is inside with hole',
         () {
           expect(
-              pointInPolygon(
-                  Point(coordinates: Position.of([1.2, 1.2])), polygonWithHole),
-              true);
+            pointInPolygon(
+                Point(coordinates: Position.of([1.2, 1.2])), polygonWithHole),
+            PointInPolygonResult.isInside,
+          );
         },
       );
 
@@ -125,9 +127,10 @@ main() {
         'is outside with hole',
         () {
           expect(
-              pointInPolygon(
-                  Point(coordinates: Position.of([4.9, 1.2])), polygonWithHole),
-              false);
+            pointInPolygon(
+                Point(coordinates: Position.of([4.9, 1.2])), polygonWithHole),
+            PointInPolygonResult.isOutside,
+          );
         },
       );
 
@@ -135,9 +138,10 @@ main() {
         'is in the hole',
         () {
           expect(
-              pointInPolygon(
-                  Point(coordinates: Position.of([1.6, 1.6])), polygonWithHole),
-              false);
+            pointInPolygon(
+                Point(coordinates: Position.of([1.6, 1.6])), polygonWithHole),
+            PointInPolygonResult.isOutside,
+          );
         },
       );
 
@@ -145,9 +149,10 @@ main() {
         'is on edge with hole',
         () {
           expect(
-              pointInPolygon(
-                  Point(coordinates: Position.of([1.5, 1.5])), polygonWithHole),
-              0); // is
+            pointInPolygon(
+                Point(coordinates: Position.of([1.5, 1.5])), polygonWithHole),
+            PointInPolygonResult.isOnEdge,
+          );
         },
       );
 
@@ -155,9 +160,10 @@ main() {
         'is on edge of the outside',
         () {
           expect(
-              pointInPolygon(
-                  Point(coordinates: Position.of([1.2, 1])), polygonWithHole),
-              0); // is
+            pointInPolygon(
+                Point(coordinates: Position.of([1.2, 1])), polygonWithHole),
+            PointInPolygonResult.isOnEdge,
+          );
         },
       );
 

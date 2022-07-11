@@ -1,8 +1,8 @@
 import 'package:turf/turf.dart';
 
 enum PointInPolygonResult {
-  isInsidePolygon,
-  isOnLine,
+  isInside,
+  isOnEdge,
   isOutside,
 }
 
@@ -55,28 +55,28 @@ PointInPolygonResult pointInPolygon(Point p, Polygon polygon) {
         if (f > 0) {
           k = k + 1;
         } else if (f == 0) {
-          return PointInPolygonResult.isOnLine;
+          return PointInPolygonResult.isOnEdge;
         }
       } else if (v1 > 0 && v2 <= 0) {
         f = (u1 * v2) - (u2 * v1);
         if (f < 0) {
           k = k + 1;
         } else if (f == 0) {
-          return PointInPolygonResult.isOnLine;
+          return PointInPolygonResult.isOnEdge;
         }
       } else if (v2 == 0 && v1 < 0) {
         f = (u1 * v2) - (u2 * v1);
         if (f == 0) {
-          return PointInPolygonResult.isOnLine;
+          return PointInPolygonResult.isOnEdge;
         }
       } else if (v1 == 0 && v2 < 0) {
         f = u1 * v2 - u2 * v1;
-        if (f == 0) return PointInPolygonResult.isOnLine;
+        if (f == 0) return PointInPolygonResult.isOnEdge;
       } else if (v1 == 0 && v2 == 0) {
         if (u2 <= 0 && u1 >= 0) {
-          return PointInPolygonResult.isOnLine;
+          return PointInPolygonResult.isOnEdge;
         } else if (u1 <= 0 && u2 >= 0) {
-          return PointInPolygonResult.isOnLine;
+          return PointInPolygonResult.isOnEdge;
         }
       }
       currentP = nextP;
@@ -88,5 +88,5 @@ PointInPolygonResult pointInPolygon(Point p, Polygon polygon) {
   if (k % 2 == 0) {
     return PointInPolygonResult.isOutside;
   }
-  return PointInPolygonResult.isInsidePolygon;
+  return PointInPolygonResult.isInside;
 }
