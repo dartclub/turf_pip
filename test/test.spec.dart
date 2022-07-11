@@ -17,13 +17,16 @@ main() {
       ]);
 
       test('is inside', () {
-        expect(pip(Point(coordinates: Position.of([1.5, 1.5])), polygon), true);
+        expect(
+            pointInPolygon(
+                Point(coordinates: Position.of([1.5, 1.5])), polygon),
+            true);
       });
 
       test(
         'input is not modified',
         () {
-          pip(Point(coordinates: Position.of([2, 1.5])), polygon);
+          pointInPolygon(Point(coordinates: Position.of([2, 1.5])), polygon);
           expect(
             polygon.coordinates,
             [
@@ -43,7 +46,9 @@ main() {
         'is outside',
         () {
           expect(
-              pip(Point(coordinates: Position.of([4.9, 1.2])), polygon), false);
+              pointInPolygon(
+                  Point(coordinates: Position.of([4.9, 1.2])), polygon),
+              false);
         },
       );
 
@@ -51,7 +56,9 @@ main() {
         'is on top edge',
         () {
           expect(
-              pip(Point(coordinates: Position.of([1.5, 2])), polygon), 0); // is
+              pointInPolygon(
+                  Point(coordinates: Position.of([1.5, 2])), polygon),
+              0); // is
         },
       );
 
@@ -59,7 +66,9 @@ main() {
         'is on bottom edge',
         () {
           expect(
-              pip(Point(coordinates: Position.of([1.5, 1])), polygon), 0); // is
+              pointInPolygon(
+                  Point(coordinates: Position.of([1.5, 1])), polygon),
+              0); // is
         },
       );
 
@@ -67,7 +76,9 @@ main() {
         'is on left edge',
         () {
           expect(
-              pip(Point(coordinates: Position.of([1, 1.5])), polygon), 0); // is
+              pointInPolygon(
+                  Point(coordinates: Position.of([1, 1.5])), polygon),
+              0); // is
         },
       );
 
@@ -75,7 +86,9 @@ main() {
         'is on right edge',
         () {
           expect(
-              pip(Point(coordinates: Position.of([2, 1.5])), polygon), 0); // is
+              pointInPolygon(
+                  Point(coordinates: Position.of([2, 1.5])), polygon),
+              0); // is
         },
       );
 
@@ -102,7 +115,8 @@ main() {
         'is inside with hole',
         () {
           expect(
-              pip(Point(coordinates: Position.of([1.2, 1.2])), polygonWithHole),
+              pointInPolygon(
+                  Point(coordinates: Position.of([1.2, 1.2])), polygonWithHole),
               true);
         },
       );
@@ -111,7 +125,8 @@ main() {
         'is outside with hole',
         () {
           expect(
-              pip(Point(coordinates: Position.of([4.9, 1.2])), polygonWithHole),
+              pointInPolygon(
+                  Point(coordinates: Position.of([4.9, 1.2])), polygonWithHole),
               false);
         },
       );
@@ -120,7 +135,8 @@ main() {
         'is in the hole',
         () {
           expect(
-              pip(Point(coordinates: Position.of([1.6, 1.6])), polygonWithHole),
+              pointInPolygon(
+                  Point(coordinates: Position.of([1.6, 1.6])), polygonWithHole),
               false);
         },
       );
@@ -129,7 +145,8 @@ main() {
         'is on edge with hole',
         () {
           expect(
-              pip(Point(coordinates: Position.of([1.5, 1.5])), polygonWithHole),
+              pointInPolygon(
+                  Point(coordinates: Position.of([1.5, 1.5])), polygonWithHole),
               0); // is
         },
       );
@@ -138,7 +155,8 @@ main() {
         'is on edge of the outside',
         () {
           expect(
-              pip(Point(coordinates: Position.of([1.2, 1])), polygonWithHole),
+              pointInPolygon(
+                  Point(coordinates: Position.of([1.2, 1])), polygonWithHole),
               0); // is
         },
       );
@@ -156,7 +174,9 @@ main() {
             ],
           );
 
-          expect(() => pip(Point(coordinates: Position.of([1, 1])), poly),
+          expect(
+              () =>
+                  pointInPolygon(Point(coordinates: Position.of([1, 1])), poly),
               throwsA(isA<Exception>()));
           // 'First and last coordinates in a ring must be the same');
         },

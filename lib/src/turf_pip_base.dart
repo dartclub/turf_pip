@@ -1,6 +1,12 @@
 import 'package:turf/turf.dart';
 
-pip(Point p, Polygon polygon) {
+enum PointInPolygonResult {
+  isInsidePolygon,
+  isOnLine,
+  isOutside,
+}
+
+PointInPolygonResult pointInPolygon(Point p, Polygon polygon) {
   int i = 0;
   int ii = 0;
   int k = 0;
@@ -49,28 +55,28 @@ pip(Point p, Polygon polygon) {
         if (f > 0) {
           k = k + 1;
         } else if (f == 0) {
-          return 0;
+          return PointInPolygonResult.isOnLine;
         }
       } else if (v1 > 0 && v2 <= 0) {
         f = (u1 * v2) - (u2 * v1);
         if (f < 0) {
           k = k + 1;
         } else if (f == 0) {
-          return 0;
+          return PointInPolygonResult.isOnLine;
         }
       } else if (v2 == 0 && v1 < 0) {
         f = (u1 * v2) - (u2 * v1);
         if (f == 0) {
-          return 0;
+          return PointInPolygonResult.isOnLine;
         }
       } else if (v1 == 0 && v2 < 0) {
         f = u1 * v2 - u2 * v1;
-        if (f == 0) return 0;
+        if (f == 0) return PointInPolygonResult.isOnLine;
       } else if (v1 == 0 && v2 == 0) {
         if (u2 <= 0 && u1 >= 0) {
-          return 0;
+          return PointInPolygonResult.isOnLine;
         } else if (u1 <= 0 && u2 >= 0) {
-          return 0;
+          return PointInPolygonResult.isOnLine;
         }
       }
       currentP = nextP;
@@ -80,9 +86,9 @@ pip(Point p, Polygon polygon) {
   }
 
   if (k % 2 == 0) {
-    return false;
+    return PointInPolygonResult.isOutside;
   }
-  return true;
+  return PointInPolygonResult.isInsidePolygon;
 }
 
 /**

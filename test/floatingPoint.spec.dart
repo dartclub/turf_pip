@@ -25,7 +25,8 @@ main() {
         'is on edge poly',
         () {
           expect(
-              pip(Point(coordinates: Position.of([-115.1752799, 36.0874526])),
+              pointInPolygon(
+                  Point(coordinates: Position.of([-115.1752799, 36.0874526])),
                   polygon),
               0); // is
         },
@@ -35,7 +36,8 @@ main() {
         'is on other edge poly',
         () {
           expect(
-              pip(Point(coordinates: Position.of([-115.1752799, 36.0873974])),
+              pointInPolygon(
+                  Point(coordinates: Position.of([-115.1752799, 36.0873974])),
                   polygon),
               0); // is
         },
@@ -57,7 +59,8 @@ main() {
         'is on edge slightly tweaked poly',
         () {
           expect(
-              pip(Point(coordinates: Position.of([-115.1752799, 36.0874528])),
+              pointInPolygon(
+                  Point(coordinates: Position.of([-115.1752799, 36.0874528])),
                   shiftedPoly),
               0); // is
         },
@@ -67,7 +70,8 @@ main() {
         'is on other edge slightly tweaked poly',
         () {
           expect(
-              pip(Point(coordinates: Position.of([-115.1752799, 36.0873974])),
+              pointInPolygon(
+                  Point(coordinates: Position.of([-115.1752799, 36.0873974])),
                   shiftedPoly),
               0); // is
         },

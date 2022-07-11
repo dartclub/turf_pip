@@ -20,7 +20,8 @@ main() {
             'is inside',
             () {
               expect(
-                  pip(Point(coordinates: Position.of([8, 46.5])), switzCoords),
+                  pointInPolygon(
+                      Point(coordinates: Position.of([8, 46.5])), switzCoords),
                   true);
             },
           );
@@ -28,7 +29,9 @@ main() {
           test(
             'is outside',
             () {
-              expect(pip(Point(coordinates: Position.of([8, 44])), switzCoords),
+              expect(
+                  pointInPolygon(
+                      Point(coordinates: Position.of([8, 44])), switzCoords),
                   false);
             },
           );
@@ -47,7 +50,7 @@ main() {
             'is inside kinked',
             () {
               expect(
-                  pip(Point(coordinates: Position.of([8, 46.5])),
+                  pointInPolygon(Point(coordinates: Position.of([8, 46.5])),
                       switzerlandKinked),
                   true);
             },
@@ -57,7 +60,7 @@ main() {
             'is outside kinked',
             () {
               expect(
-                  pip(Point(coordinates: Position.of([8, 44])),
+                  pointInPolygon(Point(coordinates: Position.of([8, 44])),
                       switzerlandKinked),
                   false);
             },

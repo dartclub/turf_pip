@@ -20,7 +20,9 @@ main() {
       test(
         'is on bottom edge poly',
         () {
-          expect(pip(_toPoint([1.511111111111, 1.111111111111]), polygon),
+          expect(
+              pointInPolygon(
+                  _toPoint([1.511111111111, 1.111111111111]), polygon),
               0); // is
         },
       );
@@ -28,7 +30,9 @@ main() {
       test(
         'is on top edge poly',
         () {
-          expect(pip(_toPoint([1.511111111111, 2.111111111111]), polygon),
+          expect(
+              pointInPolygon(
+                  _toPoint([1.511111111111, 2.111111111111]), polygon),
               0); // is
         },
       );
@@ -36,7 +40,9 @@ main() {
       test(
         'is on left edge poly',
         () {
-          expect(pip(_toPoint([1.111111111111, 1.511111111111]), polygon),
+          expect(
+              pointInPolygon(
+                  _toPoint([1.111111111111, 1.511111111111]), polygon),
               0); // is
         },
       );
@@ -44,7 +50,9 @@ main() {
       test(
         'is on right edge poly',
         () {
-          expect(pip(_toPoint([2.111111111111, 1.511111111111]), polygon),
+          expect(
+              pointInPolygon(
+                  _toPoint([2.111111111111, 1.511111111111]), polygon),
               0); // is
         },
       );
@@ -52,7 +60,9 @@ main() {
       test(
         'is just inside left edge',
         () {
-          expect(pip(_toPoint([1.1111111111111, 1.511111111111]), polygon),
+          expect(
+              pointInPolygon(
+                  _toPoint([1.1111111111111, 1.511111111111]), polygon),
               true); // is
         },
       );
@@ -60,7 +70,9 @@ main() {
       test(
         'is just outside left edge',
         () {
-          expect(pip(_toPoint([1.111111111110, 1.511111111111]), polygon),
+          expect(
+              pointInPolygon(
+                  _toPoint([1.111111111110, 1.511111111111]), polygon),
               false); // is
         },
       );
