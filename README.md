@@ -1,4 +1,4 @@
-A small library for detecting in a point lies inside a polygon
+A small library for detecting if a point lies inside a polygon
 
 **Features**
 - Works on polygons with holes

@@ -1,7 +1,7 @@
 // Inspiration drawn from TurfJS issue
 // https://github.com/Turfjs/turf/issues/1597
 
-import 'package:pip/pip.dart';
+import 'package:turf_pip/turf_pip.dart';
 import 'package:test/test.dart';
 import 'package:turf/helpers.dart';
 

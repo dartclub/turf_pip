@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:pip/pip.dart';
+import 'package:turf_pip/turf_pip.dart';
 import 'package:test/test.dart';
 import 'package:turf/helpers.dart';
 

@@ -1,8 +1,7 @@
-name: pip
-description: A starting point for Dart libraries or applications.
-version: 1.0.0
-publish_to: none
-# homepage:
+name: turf_pip
+description: A small library for detecting if a point lies inside a polygon
+version: 0.0.1
+repository: https://github.com/dartclub/turf_pip
 
 environment:
   sdk: ">=2.17.1 <3.0.0"
@@ -16,7 +15,4 @@ dev_dependencies:
   benchmark: ^0.3.0
 
 dependencies:
-  turf:
-    git:
-      url: https://github.com/dartclub/turf_dart.git
-      ref: main
+  turf: ^0.0.6

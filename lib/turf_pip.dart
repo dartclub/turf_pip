@@ -1,8 +1,8 @@
 /// Support for doing something awesome.
 ///
 /// More dartdocs go here.
-library pip;
+library turf_pip;
 
-export 'src/pip_base.dart';
+export 'src/turf_pip_base.dart';
 
 // TODO: Export any libraries intended for clients of this package.
