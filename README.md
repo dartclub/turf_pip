@@ -2,6 +2,12 @@
 
 A small library for detecting if a point lies inside a polygon.
 
+A port of: [point-in-polygon-hao NPM package](https://www.npmjs.com/package/point-in-polygon-hao).
+
+Point in polygon library based on the paper "Optimal Reliable Point-in-Polygon Test and Differential Coding Boolean Operations on Polygons" by Hao.
+
+
+
 ## Features
 
 - Works on polygons with holes
