@@ -53,7 +53,7 @@ main() {
         'is just inside left edge',
         () {
           expect(pip(_toPoint([1.1111111111111, 1.511111111111]), polygon),
-              true); // is
+              1); // is
         },
       );
 
@@ -61,7 +61,7 @@ main() {
         'is just outside left edge',
         () {
           expect(pip(_toPoint([1.111111111110, 1.511111111111]), polygon),
-              false); // is
+              -1); // is
         },
       );
     },

@@ -17,7 +17,7 @@ main() {
       ]);
 
       test('is inside', () {
-        expect(pip(Point(coordinates: Position.of([1.5, 1.5])), polygon), true);
+        expect(pip(Point(coordinates: Position.of([1.5, 1.5])), polygon), 1);
       });
 
       test(
@@ -42,8 +42,7 @@ main() {
       test(
         'is outside',
         () {
-          expect(
-              pip(Point(coordinates: Position.of([4.9, 1.2])), polygon), false);
+          expect(pip(Point(coordinates: Position.of([4.9, 1.2])), polygon), -1);
         },
       );
 
@@ -103,7 +102,7 @@ main() {
         () {
           expect(
               pip(Point(coordinates: Position.of([1.2, 1.2])), polygonWithHole),
-              true);
+              1);
         },
       );
 
@@ -112,7 +111,7 @@ main() {
         () {
           expect(
               pip(Point(coordinates: Position.of([4.9, 1.2])), polygonWithHole),
-              false);
+              -1);
         },
       );
 
@@ -121,7 +120,7 @@ main() {
         () {
           expect(
               pip(Point(coordinates: Position.of([1.6, 1.6])), polygonWithHole),
-              false);
+              -1);
         },
       );
 

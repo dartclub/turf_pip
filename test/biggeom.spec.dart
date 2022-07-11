@@ -21,7 +21,7 @@ main() {
             () {
               expect(
                   pip(Point(coordinates: Position.of([8, 46.5])), switzCoords),
-                  true);
+                  1);
             },
           );
 
@@ -29,7 +29,7 @@ main() {
             'is outside',
             () {
               expect(pip(Point(coordinates: Position.of([8, 44])), switzCoords),
-                  false);
+                  -1);
             },
           );
         }
@@ -49,7 +49,7 @@ main() {
               expect(
                   pip(Point(coordinates: Position.of([8, 46.5])),
                       switzerlandKinked),
-                  true);
+                  1);
             },
           );
 
@@ -59,7 +59,7 @@ main() {
               expect(
                   pip(Point(coordinates: Position.of([8, 44])),
                       switzerlandKinked),
-                  false);
+                  -1);
             },
           );
         }
