@@ -52,7 +52,7 @@ main() {
               expect(
                   pointInPolygon(Point(coordinates: Position.of([8, 46.5])),
                       switzerlandKinked),
-                  true);
+                  1);
             },
           );
 
@@ -62,7 +62,7 @@ main() {
               expect(
                   pointInPolygon(Point(coordinates: Position.of([8, 44])),
                       switzerlandKinked),
-                  false);
+                  -1);
             },
           );
         }

@@ -3,7 +3,7 @@ A small library for detecting if a point lies inside a polygon
 **Features**
 - Works on polygons with holes
 - Works with degenerate/self-intersecting polyons 
-- Returns `0` if on the edge
+- Returns `0` if on the edge, `1` if inside and `-1` if outside
 - Not effected by floating point errors
 
 
@@ -13,7 +13,7 @@ Install via `npm install point-in-polygon-hao`
 ````
 import inside from 'point-in-polygon-hao'
 
-const polygon = [
+const polygon = Polygon(coordinates:[
   [
     [1, 1],
     [1, 2],
@@ -21,28 +21,28 @@ const polygon = [
     [2, 1],
     [1, 1]
   ]
-];
+]);
 
-inside([ 1.5, 1.5 ], polygon)
-// => true
+pip(Point(coordinates:Position.of([ 1.5, 1.5 ]), polygon)
+// => 1
 
-inside([ 4.9, 1.2 ], polygon)
-// => false
+pip(Point(coordinates:Position.of([ 4.9, 1.2 ]), polygon)
+// => -1
 
-inside([1, 2], polygon)
+pip(Point(coordinates:Position.of([1, 2]), polygon)
 // => 0 to indicate on edge
 ````
 
 **Note:** The input polygon format aligns with the GeoJson specification for polygons. This means that the first and last coordinate in a polygon must be repeated, if not this library will throw an error.
 ````
-const polygonWithHole = [
+var polygonWithHole = Polygon(coordinates:([
   [
     [0, 0], [1, 0], [1, 1], [0, 1], [0, 0]
   ],
   [
     [0.1, 0.1], [0.1, 0.9], [0.9, 0.9], [0.9, 0.1], [0.1, 0.1]
   ]
-]
+]);
 ````
 The library does not support multi-polygons.
 
