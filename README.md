@@ -6,7 +6,7 @@ A small library for detecting if a point lies inside a polygon.
 
 - Works on polygons with holes
 - Works with degenerate/self-intersecting polyons
-- Returns `0` if on the edge, `1` if inside and `-1` if outside
+- Returns `PointInPolygonResult.isOnEdge` if on the edge, `PointInPolygonResult.isOutside` if inside and `PointInPolygonResult.isOutside` if outside
 - Not effected by floating point errors
 
 ### Usage
