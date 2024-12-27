@@ -12,7 +12,7 @@ Point in polygon library based on the paper "Optimal Reliable Point-in-Polygon T
 
 - Works on polygons with holes
 - Works with degenerate/self-intersecting polyons
-- Returns `PointInPolygonResult.isOnEdge` if on the edge, `PointInPolygonResult.isOutside` if inside and `PointInPolygonResult.isOutside` if outside
+- Returns `PointInPolygonResult.isOnEdge` if on the edge, `PointInPolygonResult.isInside` if inside and `PointInPolygonResult.isOutside` if outside
 - Not effected by floating point errors
 
 ### Usage
